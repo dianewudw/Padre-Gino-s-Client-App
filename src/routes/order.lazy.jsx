@@ -4,6 +4,7 @@ import { CartContext } from "../contexts";
 import Pizza from "../Pizza";
 import Cart from "../Cart";
 
+const apiUrl = import.meta.env.VITE_API_URL;
 export const Route = createLazyFileRoute('/order')({
   component: Order
 })
@@ -12,7 +13,6 @@ const intl = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });
-const apiUrl = import.meta.env.VITE_API_URL;
 
 function Order() {
   const [pizzaType, setPizzaType] = useState("pepperoni");
@@ -44,7 +44,7 @@ function Order() {
   }
 
   async function fetchPizzaTypes() {
-    const pizzaRes = await fetch(`/${apiUrl}/api/pizzas`);
+    const pizzaRes = await fetch(`${apiUrl}/api/pizzas`);
     const pizzaJson = await pizzaRes.json();
     setPizzaTypes(pizzaJson);
     setLoading(false);
